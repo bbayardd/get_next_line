@@ -48,7 +48,7 @@ char	*ret_value(char *saved_str)
 	if (!ret_str)
 		return (NULL);
 	ft_memcpy(ret_str, saved_str, i);
-	ret_str[++i] = '\0';
+	ret_str[i] = '\0';
 	return (ret_str);
 }
 
@@ -77,7 +77,7 @@ static char	*make_line(int fd, char *saved_str)
 	if (!buf)
 		return (NULL);
 	rd = 1;
-	while (!search_n(saved_str) && rd != 0)
+	while (!search_n(saved_str))
 	{
 		rd = read(fd, buf, BUFFER_SIZE);
 		if (rd < 0)
@@ -86,7 +86,11 @@ static char	*make_line(int fd, char *saved_str)
 			return (NULL);
 		}
 		buf[rd] = '\0';
+		if (rd == 0)
+			break ;
 		saved_str = ft_strjoin(saved_str, buf);
+		if (saved_str == 0)
+			break ;
 	}
 	free(buf);
 	return (saved_str);
@@ -101,7 +105,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 	saved_str = make_line(fd, saved_str);
 	if (!saved_str)
-		return (NULL);
+		return (0);
 	printbl_str = ret_value(saved_str);
 	saved_str = parsing(saved_str);
 	return (printbl_str);

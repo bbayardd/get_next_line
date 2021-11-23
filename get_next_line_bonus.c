@@ -48,7 +48,7 @@ char	*ret_value(char *saved_str)
 	if (!ret_str)
 		return (NULL);
 	ft_memcpy(ret_str, saved_str, i);
-	ret_str[++i] = '\0';
+	ret_str[i] = '\0';
 	return (ret_str);
 }
 
