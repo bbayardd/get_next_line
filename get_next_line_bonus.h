@@ -22,7 +22,6 @@
 # include <unistd.h>
 
 char	*get_next_line(int fd);
-void	*ft_memcpy(void *dest, const void *src, size_t n);
 int		ft_strlen(char *s);
 char	*ft_strjoin(char *s1, char *s2);
 

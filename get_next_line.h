@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 10
+#  define BUFFER_SIZE 100
 # endif
 
 # include <stddef.h>
@@ -22,7 +22,6 @@
 # include <unistd.h>
 
 char	*get_next_line(int fd);
-void	*ft_memcpy(void *dest, const void *src, size_t n);
 int		ft_strlen(char *s);
 char	*ft_strjoin(char *s1, char *s2);
 

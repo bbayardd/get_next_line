@@ -47,12 +47,20 @@ char	*ret_value(char *saved_str)
 		return (NULL);
 	while (saved_str[i] != '\n' && saved_str[i])
 		i++;
-	if (saved_str[i] == '\n')
-		i++;
 	ret_str = malloc(sizeof(char) * (i + 2));
 	if (!ret_str)
 		return (NULL);
-	ft_memcpy(ret_str, saved_str, i);
+	i = 0;
+	while (saved_str[i] && saved_str[i] != '\n')
+	{
+		ret_str[i] = saved_str[i];
+		i++; 
+	}
+	if (saved_str[i] == '\n')
+	{
+		ret_str[i] = saved_str[i];
+		i++;
+	}
 	ret_str[i] = '\0';
 	return (ret_str);
 }
@@ -66,10 +74,11 @@ char	*search_n(char *saved_str)
 	{
 		return (NULL);
 	}
-	while (saved_str[i] != '\n' && saved_str[i])
-		i++;
-	if (saved_str[i] != '\n')
-		return (NULL);
+	while (saved_str[i++] != '\n')
+	{	
+		if (!saved_str[i])
+			return (NULL);
+	}
 	return ((char *)&saved_str[i]);
 }
 
@@ -93,8 +102,6 @@ static char	*make_line(int fd, char *saved_str)
 		if (rd == 0)
 			break ;
 		saved_str = ft_strjoin(saved_str, buf);
-		if (saved_str == 0)
-			break ;
 	}
 	free(buf);
 	return (saved_str);
