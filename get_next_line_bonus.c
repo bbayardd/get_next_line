@@ -20,10 +20,13 @@ char	*parsing(char *saved_str)
 
 	i = 0;
 	c = 0;
-	while (saved_str[i] != '\n')
+	while (saved_str[i] != '\n' && saved_str[i])
 		i++;
 	if (!saved_str[i])
+	{
+		free(saved_str);
 		return (NULL);
+	}	
 	new_str = malloc(sizeof(char) * (ft_strlen(saved_str) - i + 1));
 	if (!new_str)
 		return (NULL);
@@ -40,6 +43,8 @@ char	*ret_value(char *saved_str)
 	char	*ret_str;
 
 	i = 0;
+	if (saved_str[i] == '\0')
+		return (NULL);
 	while (saved_str[i] != '\n' && saved_str[i])
 		i++;
 	if (saved_str[i] == '\n')
@@ -76,8 +81,7 @@ static char	*make_line(int fd, char *saved_str)
 	buf = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buf)
 		return (NULL);
-	rd = 1;
-	while (!search_n(saved_str) && rd != 0)
+	while (!search_n(saved_str))
 	{
 		rd = read(fd, buf, BUFFER_SIZE);
 		if (rd < 0)
@@ -86,7 +90,11 @@ static char	*make_line(int fd, char *saved_str)
 			return (NULL);
 		}
 		buf[rd] = '\0';
+		if (rd == 0)
+			break ;
 		saved_str = ft_strjoin(saved_str, buf);
+		if (saved_str == 0)
+			break ;
 	}
 	free(buf);
 	return (saved_str);
