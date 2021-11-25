@@ -17,8 +17,6 @@ int	ft_strlen(char *s)
 	int	i;
 
 	i = 0;
-	if (!s)
-		return (0);
 	while (s[i])
 		i++;
 	return (i);
@@ -35,6 +33,8 @@ char	*ft_strjoin(char *s1, char *s2)
 	if (!s1)
 	{
 		s1 = malloc(sizeof(char) * 1);
+		if (!s1)
+			return (NULL);
 		s1[i] = '\0';
 	}
 	sum_s = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 2));
@@ -46,5 +46,6 @@ char	*ft_strjoin(char *s1, char *s2)
 	while (s2[c])
 		sum_s[i++] = s2[c++];
 	sum_s[i] = '\0';
+	free(s1);
 	return (sum_s);
 }
