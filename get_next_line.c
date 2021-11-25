@@ -54,7 +54,7 @@ char	*ret_value(char *saved_str)
 	while (saved_str[i] && saved_str[i] != '\n')
 	{
 		ret_str[i] = saved_str[i];
-		i++; 
+		i++;
 	}
 	if (saved_str[i] == '\n')
 	{
@@ -71,12 +71,10 @@ char	*search_n(char *saved_str)
 
 	i = 0;
 	if (!saved_str)
-	{
 		return (NULL);
-	}
-	while (saved_str[i++] != '\n')
+	while (saved_str[i] != '\n')
 	{	
-		if (!saved_str[i])
+		if (!saved_str[i++])
 			return (NULL);
 	}
 	return ((char *)&saved_str[i]);

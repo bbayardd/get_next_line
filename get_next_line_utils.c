@@ -37,7 +37,7 @@ char	*ft_strjoin(char *s1, char *s2)
 			return (NULL);
 		s1[i] = '\0';
 	}
-	sum_s = malloc(sizeof(char) * (ft_strlen((char *)s1) + ft_strlen((char *)s2) + 2));
+	sum_s = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 2));
 	if (!sum_s || !s2)
 		return (NULL);
 	while (s1[c])
